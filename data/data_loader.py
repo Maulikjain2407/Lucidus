@@ -1,11 +1,7 @@
-from pathlib import Path
+from configs.configs import UNPROCESSED_DATA_PATH
 
-directory=Path(__file__).resolve().parent
-file_path=directory/"unprocessed_data.txt"
+def file_loader():
+    if not UNPROCESSED_DATA_PATH.exists():
+        raise FileNotFoundError(f"{UNPROCESSED_DATA_PATH} not found")
 
-def file_loader(file_path):
-    with file_path.open("r") as f:
-        data=f.read()
-    return data
-
-file_loader(file_path=file_path)
+    return UNPROCESSED_DATA_PATH.read_text(encoding="utf-8")
